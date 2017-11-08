@@ -17,20 +17,20 @@
         #bdy {
             background-color: #343a40;
         }
+        .thing {
+            height: 25vh !important;
+            width: 98vw !important;
+            margin: 10px 10px 10px 10px !important;
+        }
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
-<body id="bdy">
+<body id="bdy" class="text-white">
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div id="bigText"> Science Battle! </div>
+    <button type="button" onclick="buzz()" class="btn thing btn-primary btn-lg btn-block">Buzz</button>
+    <h1 style="margin: 20px">
+      Miss Nessa's Team
+    </h1>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
@@ -41,43 +41,14 @@
             "Miss Islam's Team": "#FF0000",
             "Miss Nessa's Team": "#008080"
         }
-        var sounds = {
-            "Miss Islam's Team": "/buzzer1.mp3",
-            "Miss Nessa's Team": "/buzzer2.mp3"
-        }
         var socket = io.connect();
         socket.on('connect', function(data) {
             console.log("Connected")
             
         });
-        function bgColor(color) {
-            $("#bdy").animate({"background-color": color}, 100)
+        function buzz() {
+          socket.emit("plsBuzz", "Miss Nessa's Team")
         }
-        function playSound(url){
-            var audio = document.createElement('audio');
-            audio.style.display = "none";
-            audio.src = url;
-            audio.autoplay = true;
-            audio.onended = function(){
-                audio.remove() //Remove when played.
-            };
-            document.body.appendChild(audio);
-        }
-        socket.on("buzz", function (team) {
-            bgColor(teamMapping[team])
-            playSound(sounds[team])
-            $("#bigText").fadeOut(100, function () {
-                $("#bigText").text(team)
-                $("#bigText").fadeIn(100)
-                setTimeout(function () {
-                    $("#bigText").fadeOut(100, function () {
-                        $("#bigText").text("Science Battle!")
-                        $("#bigText").fadeIn(100)
-                    })
-                    bgColor("#343a40");
-                }, 2000)
-            })
-        })
     </script>
 </body>
 </html>
