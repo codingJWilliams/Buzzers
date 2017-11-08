@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Lmao</title>
+</head>
+
+<body>
+    <h1>Hello World!</h1>
+    <div id="future">Test</div>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect();
+        socket.on('connect', function(data) {
+            console.log("Connected")
+        });
+    </script>
+</body>
+
+</html>
