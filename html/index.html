@@ -30,7 +30,7 @@
     <br>
     <br>
     <br>
-    <div id="bigText"> Science Battle! </div>
+    <div id="bigText"> 10x1  v  10x2 </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
@@ -44,6 +44,10 @@
         var sounds = {
             "Miss Islam's Team": "/buzzer1.mp3",
             "Miss Nessa's Team": "/buzzer2.mp3"
+        }
+        var names = {
+            "Miss Islam's Team": "10x1",
+            "Miss Nessa's Team": "10x2"
         }
         var socket = io.connect();
         socket.on('connect', function(data) {
@@ -67,11 +71,11 @@
             bgColor(teamMapping[team])
             playSound(sounds[team])
             $("#bigText").fadeOut(100, function () {
-                $("#bigText").text(team)
+                $("#bigText").text(names[team])
                 $("#bigText").fadeIn(100)
                 setTimeout(function () {
                     $("#bigText").fadeOut(100, function () {
-                        $("#bigText").text("Science Battle!")
+                        $("#bigText").text("10x1  v  10x2")
                         $("#bigText").fadeIn(100)
                     })
                     bgColor("#343a40");
